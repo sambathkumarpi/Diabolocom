@@ -21,7 +21,11 @@
   - Added Kubernetes deployment configuration.
   - Ensured proper configuration of pods and services for the application.
 
+### Math work Commit
+- **Date:** Sat Dec 14 21:18:08 CET 2024
+- **Details:**
+  - Bash scrip allow as to provide Math operation
+  - 1 for addition, 2 for subtraction, 3 for multiplication, and 4 for division
+
 ---
-
-This is an ongoing project with further improvements planned in the future. Stay tuned for more updates!
-
+Thank you!!
