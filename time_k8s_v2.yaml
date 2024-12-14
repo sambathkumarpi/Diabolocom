@@ -1,0 +1,53 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: time-app
+  labels:
+    app: time-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: time-app
+  template:
+    metadata:
+      labels:
+        app: time-app
+    spec:
+      containers:
+      - name: time-app-container
+        image: time:v1  
+        ports:
+        - containerPort: 80
+        env:
+        - name: MY_NAME
+          value: "Sambath"  # Environment variable
+        - name: APP_MODE
+          value: "production"  # Example of another environment variable
+        resources:
+          requests:
+            memory: "128Mi"  # Memory requested by the container
+            cpu: "250m"      # CPU requested by the container
+          limits:
+            memory: "512Mi"  # Memory limit for the container
+            cpu: "500m"      # CPU limit for the container
+        volumeMounts:
+        - name: app-storage
+          mountPath: /app/storage  # Mounting the volume at this path
+        livenessProbe:
+          httpGet:
+            path: /healthz  # we need to make this slug to provide the 200:ok
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: app-storage
+        emptyDir: {}  # This can be changed to a PersistentVolumeClaim if needed
+
