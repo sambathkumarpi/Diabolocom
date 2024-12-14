@@ -1,7 +1,7 @@
 # Diabolocom Project
 
 ## Overview
-**Diabolocom** is a project focused on **Ansible** and **Kubernetes** integration for seamless deployment and management.
+**Diabolocom** is a project focused on **Git**, **Ansible**, **Kubernetes** and **Bash** along with the time commite
 
 ## Commits
 
