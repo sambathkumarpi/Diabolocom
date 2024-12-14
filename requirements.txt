@@ -1,0 +1,5 @@
+ansible==2.10.8
+pyyaml
+jinja2
+six
+

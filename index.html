@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Clock with Greeting</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .clock {
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+        .greeting {
+            font-size: 24px;
+            color: #4CAF50;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Real-Time Clock Hi!!!</h1>
+    <p>The current time is:</p>
+    <div id="clock" class="clock"></div>
+    <div id="greeting" class="greeting"></div>
+</div>
+
+<script>
+    function updateClock() {
+        var currentTime = new Date();
+        var hours = currentTime.getHours();
+        var minutes = currentTime.getMinutes();
+        var seconds = currentTime.getSeconds();
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        var timeString = hours + ":" + minutes + ":" + seconds;
+        document.getElementById("clock").textContent = timeString;
+        updateGreeting(hours);
+    }
+
+    function updateGreeting(hours) {
+        var greetingMessage = '';
+        if (hours >= 5 && hours < 12) {
+            greetingMessage = 'Good morning!';
+        } else if (hours >= 12 && hours < 18) {
+            greetingMessage = 'Good afternoon!';
+        } else {
+            greetingMessage = 'Good evening!';
+        }
+        document.getElementById("greeting").textContent = greetingMessage;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+</script>
+
+</body>
+</html>
+

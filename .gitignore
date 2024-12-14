@@ -1,0 +1,16 @@
+# Ignore Python virtual environment directories
+venv/
+env/
+
+# Optional: If you're using pyenv, ignore its environment directory as well
+.python-version
+
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore other common Python artifacts
+*.pdb
+*.log
+

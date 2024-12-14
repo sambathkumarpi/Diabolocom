@@ -1,0 +1,49 @@
+---
+- name: Deploy Docker Container on Remote Machine
+  hosts: remote_host
+  become: true
+  tasks:
+    - name: Install Docker (Ubuntu)
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Ensure Docker is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Create directory for Ansible tasks
+      file:
+        path: /home/sambath/ansibleTaks
+        state: directory
+        mode: '0755'
+
+    - name: Copy Dockerfile to remote machine
+      copy:
+        src: ../Dockerfile    # Assuming Dockerfile is in the current directory or use the full path if needed
+        dest: /home/sambath/ansibleTaks/Dockerfile
+        mode: '0644'
+
+    - name: Copy HTML file to remote machine
+      copy:
+        src: ../index.html    # Assuming index.html is in the current directory or use the full path if needed
+        dest: /home/sambath/ansibleTaks/index.html
+        mode: '0644'
+
+    - name: Build Docker image from Dockerfile
+      command: docker build -t time /home/sambath/ansibleTaks
+      args:
+        chdir: /home/sambath/ansibleTaks
+
+    - name: Run the Docker container
+      docker_container:
+        name: time          # Updated the name of the container to 'time'
+        image: time         # Using 'time' as the image name
+        state: started
+        restart_policy: always
+        published_ports:
+          - "8080:80"
+
